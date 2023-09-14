@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts for a week</title>
+</head>
+<body>
+    {% block content %}
+<h3>Hello, {{ user.username }}. Here are the posts for a last week!» </h3>
+    {% for post in posts %}
+<br>
+<h4>{{ post.title }}</h4>
+<p>{{ post.text | truncatewords:20 }} <a href="http://127.0.0.1:8000/{{post.id}}">Read more</a></p>
+<hr>
+    {% endfor %}
+    {% endblock content %}
+</body>
+</html>

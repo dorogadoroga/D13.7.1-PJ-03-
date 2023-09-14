@@ -1,0 +1,135 @@
+{% extends 'banner.html' %}
+{% load static %}
+
+{% block title %}
+    Account
+{% endblock title %}
+
+{% block content %}
+<div class="container p-t-4 p-b-40">
+  <h2 class="f1-l-1 cl2">
+    <br>
+    {% if query_set_posts %}
+      Your Posts
+    {% else %}
+      You don't have any posts yet
+    {% endif %}
+  </h2>
+</div>
+<!-- Post -->
+<section class="bg0 p-b-55">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 p-b-80">
+        <div class="p-r-10 p-r-0-sr991">
+          <div class="m-t--40 p-b-40">
+            {% if query_set_posts %}
+              {% for post in query_set_posts %}
+                <div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
+                  <a href="{% url 'post_detail' post.id %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
+                    {% if post.media_content %}
+                      <img src='{{ post.media_content.url }}' alt="MEDIA">
+                    {% elif post.image %}
+                      <img src='{{ post.image.url }}' alt="IMG">
+                    {% endif %}
+                  </a>
+                  <div class="size-w-9 w-full-sr575 m-b-25">
+                    <h5 class="p-b-12">
+                      <a href="{% url 'post_detail' post.id %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
+                        {{ post.title }}
+                      </a>
+                    </h5>
+                    <div class="cl8 p-b-18">
+                      <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+                        {{ post.date | date:'d M Y' }}
+                      </a>
+                      <span class="f1-s-3">
+                        {{ post.comments.count }} Comments
+                      </span>
+                    </div>
+                    <p class="f1-s-1 cl6 p-b-24">
+                      {{ post.text | truncatewords:30}}
+                    </p>
+                    <a href="{% url 'edit_post' post.id %}"><img src="{% static 'images/icons/edit.svg' width='20' %}" width="20">  </a>
+                    <a href="{% url 'delete_post' post.id %}"><img src="{% static 'images/icons/delete.svg' width='20' %}" width="20"></a>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <!-- Pagination -->
+        {% if is_paginated %}
+          <div class="flex-wr-s-c m-rl--7 p-t-15">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7"> <<< </a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                   <a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7"> >>> </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-md-10 col-lg-4 p-b-80">
+        <div class="p-l-10 p-rl-0-sr991">
+          <!-- Create Post -->
+          <a href="{% url 'add_post' user.id %}" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+            Create a Post
+          </a>
+        </div>
+        <div class="p-l-10 p-rl-0-sr991">
+          <!-- View Comments -->
+          <a href="{% url 'comments' user.id %}" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+            View Comments
+          </a>
+        </div>
+        <div class="p-l-10 p-rl-0-sr991">
+          <!-- Logout -->
+          <a href="/accounts/logout" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+            Logout
+          </a>
+        </div>
+        <!-- Subscribe -->
+        {% if user_is_not_subscribe %}
+          <div class="p-l-10 p-rl-0-sr991">
+            <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
+              <h5 class="f1-m-5 cl0 p-b-10">
+                Subscribe
+              </h5>
+              <p class="f1-s-1 cl0 p-b-25">
+                Get all latest content delivered to your email a few times a month.
+              </p>
+              <a href="{% url 'subscribe' user.id %}" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+                Subscribe
+              </a>
+            </div>
+          </div>
+        {% else %}
+          <div class="p-l-10 p-rl-0-sr991">
+            <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
+              <h5 class="f1-m-5 cl0 p-b-10">
+                Cancel Subscription
+              </h5>
+              <p class="f1-s-1 cl0 p-b-25">
+                Are you sure you want to cancel your subscription?
+              </p>
+              <a href="{% url 'subscribe' user.id %}" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+                Cancel
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

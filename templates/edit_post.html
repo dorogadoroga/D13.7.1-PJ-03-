@@ -1,0 +1,46 @@
+{% extends 'banner.html' %}
+
+{% block title %}
+Edit Post
+{% endblock title %}
+
+{% block content %}
+<div class="container p-t-4 p-b-40">
+    <h2 class="f1-l-1 cl2">
+        <br>
+        Use the form to edit the post
+    </h2>
+</div>
+<section class="bg0 p-b-55">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 p-b-80">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.category.label_tag }}{{ form.category }}
+                    {{ form.title.label_tag }}
+                    <div class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20">
+                        {{ form.title }}
+                    </div>
+                    {{ form.text.label_tag }}
+                    <div class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20">
+                        {{ form.text }}
+                    </div>
+                    {{ form.image.label_tag }}
+                    <div class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20">
+                        {{ form.image }}
+                    </div>
+                    {{ form.media_content.label_tag }}
+                    <div class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20">
+                        {{ form.media_content }}
+                    </div>
+                    <br>
+                    <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
+                      Save changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

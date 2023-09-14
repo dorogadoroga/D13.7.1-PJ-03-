@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block banner %}
+  {% if user.is_authenticated %}
+    <a href="{% url 'account' user.id %}"><img src="{% static 'images/icons/banner-01.png' %}" alt="IMG"></a>
+  {% else %}
+    <a href="accounts/login"><img src="{% static 'images/icons/banner.png' %}" alt="IMG"></a>
+  {% endif %}
+{% endblock banner %}
+

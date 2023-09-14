@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bulletin Board - {% block title %} {% endblock title %}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+	<!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+            <!-- Header Mobile -->
+			<div class="wrap-header-mobile">
+				<!-- Logo moblie -->
+				<div class="logo-mobile">
+					<a href="{% url 'posts' %}"><img src="{% static 'images/icons/logo.png' %}" alt="LOGO"></a>
+				</div>
+
+				<!-- Button show menu -->
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+            <!-- Menu Mobile -->
+			<div class="menu-mobile">
+                <ul class="main-menu-m">
+					<li>
+						<a href="{% url 'posts' %}">Main</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'TA' %}">Tanks</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'HI' %}">Healers</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'DD' %}">Damage Dealers</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'TR' %}">Traders</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'GM' %}">Guild Master</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'QG' %}">Quest Givers</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'BS' %}">Blacksmiths</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'LW' %}">Leatherworkers</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'PM' %}">Potion Makers</a>
+					</li>
+					<li>
+						<a href="{% url 'posts_by_categories' 'SM' %}">Spell Masters</a>
+					</li>
+				</ul>
+			</div>
+			<!--  -->
+			<div class="wrap-logo container">
+				<!-- Logo desktop -->
+				<div class="logo">
+					<a href="{% url 'posts' %}"><img src="{% static 'images/icons/logo.png' %}" alt="LOGO"></a>
+				</div>
+			<!-- Banner -->
+				<div class="banner-header">
+					{% block banner %}
+					{% endblock banner %}
+				</div>
+			</div>
+			<!--  -->
+			<div class="wrap-main-nav">
+				<div class="main-nav">
+					<!-- Menu desktop -->
+					<nav class="menu-desktop">
+						<ul class="main-menu">
+							<li class="main-menu-active">
+								<a href="{% url 'posts' %}">Main</a>
+							</li>
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'TA' %}">Tanks</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'HI' %}">Healers</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'DD' %}">Damage Dealers</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'TR' %}">Traders</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'GM' %}">Guild Master</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'QG' %}">Quest Givers</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'BS' %}">Blacksmiths</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'LW' %}">Leatherworkers</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'PM' %}">Potion Makers</a>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="{% url 'posts_by_categories' 'SM' %}">Spell Masters</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	{% block content %}
+	{% endblock content %}
+	<footer>
+		<div class="bg2 p-t-40 p-b-25">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<a href="index.html">
+								<img class="max-s-full" src="{% static 'images/icons/logo-01.png' %}" alt="LOGO">
+							</a>
+						</div>
+
+						<div>
+							<p class="f1-s-1 cl11 p-b-16">
+								This is a project of Bulletin Board for SKILLFACTORY. It is an online resource for a fan server of a well-known MMORPG.
+							</p>
+
+							<div class="p-t-15">
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-facebook-f"></span>
+								</a>
+
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-twitter"></span>
+								</a>
+
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-pinterest-p"></span>
+								</a>
+
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-vimeo-v"></span>
+								</a>
+
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-youtube"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bg11">
+			<div class="container size-h-4 flex-c-c p-tb-15">
+				<span class="f1-s-1 cl0 txt-center">
+					<a href="#" class="f1-s-1 cl10 hov-link1">
+						Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script>
+						All rights reserved | This template is made with
+						<i class="fa fa-heart" aria-hidden="true"></i>
+						by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+				</span>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fas fa-angle-up"></span>
+		</span>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
+
+

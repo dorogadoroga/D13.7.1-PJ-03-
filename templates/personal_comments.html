@@ -1,0 +1,60 @@
+{% extends 'banner.html' %}
+
+{% block title %}
+    Comments
+{% endblock title %}
+
+{% block content %}
+
+	<section class="bg0 p-b-140 p-t-10">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8 p-b-30">
+					<div class="p-r-10 p-r-0-sr991">
+						<!-- Blog Detail -->
+						{% if comments %}
+							<strong>Comments</strong>
+							<div class="p-b-70">
+								<form method="GET">
+									{{ filter.form }}
+									<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Find</button>
+								</form>
+								{% for comment in filter.qs %}
+									<hr>
+									<div class="flex-wr-s-s p-b-40">
+										<span class="f1-s-3 cl8 m-r-15">
+											<span>
+												by {{ comment.author }}
+											</span>
+											<span class="m-rl-3">-</span>
+											<span>
+												{{ comment.date | date:'d M Y' }}
+											</span>
+										</span>
+										<p class="f1-s-11 cl6 p-b-25">
+                                			{{ comment.text }}
+										</p>
+										<!-- Operations with a comment -->
+										{% if not comment.is_accepted %}
+											<form method="POST">
+												{% csrf_token %}
+												<fieldset>
+													<label for="accept">Accept a Comment</label>
+													<input type="radio" id="accept" name="action" value="accept" checked>
+													<label for="delete">Delete a Comment</label>
+													<input type="radio" id="delete" name="action" value="delete">
+												</fieldset>
+												<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10" name=comment_id value={{ comment.id }}>Confirm</button>
+											</form>
+										{% endif %}
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

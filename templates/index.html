@@ -1,0 +1,43 @@
+{% extends 'banner.html' %}
+
+{% block title %}
+    Post List
+{% endblock title %}
+
+{% block content %}
+<div class="container p-t-4 p-b-40">
+    <h2 class="f1-l-1 cl2">
+        <br>
+        Post List
+    </h2>
+</div>
+{% for post in posts %}
+    <div class="flex-col-s-c how-bor2 p-t-65 p-b-40">
+        <a href="{% url 'posts_by_categories' post.category.slug %}" class="f1-s-10 cl2 text-uppercase txt-center hov-cl10 trans-03 p-b-40">{{ post.category}}</a>
+        <h5 class="p-b-17 txt-center">
+            <a href="{% url 'post_detail' post.id %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">{{ post.title }}</a>
+        </h5>
+        <div class="cl8 txt-center p-b-24">
+            <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">by {{ post.author }}</a>
+            <span class="f1-s-3 m-rl-3"> - </span>
+            <span class="f1-s-3"> {{ post.date | date:'d M Y' }} </span>
+        </div>
+        <div style="max-width:65vw">
+            <a href="#" class="wrap-pic-w hov1 trans-03 m-b-30">
+                {% if post.media_content %}
+                    <img src='{{ post.media_content.url }}' alt="MEDIA">
+                {% elif post.image %}
+                    <img src='{{ post.image.url }}' alt="IMG">
+                {% endif %}
+            </a>
+            <p class="f1-s-11 cl6 txt-center p-b-22">
+                {{ post.text | truncatewords:100}}
+            </p>
+        </div>
+        <a href="{% url 'post_detail' post.id %}" class="f1-s-1 cl9 hov-cl10 trans-03">
+            Read More
+            <i class="m-l-2 fa fa-long-arrow-alt-right"></i>
+        </a>
+    </div>
+{% endfor %}
+{% endblock content %}

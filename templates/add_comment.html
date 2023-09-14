@@ -1,0 +1,30 @@
+{% extends 'banner.html' %}
+
+{% block content %}
+<section class="bg0 p-b-55">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 p-b-80">
+              <div>
+                <h4 class="f1-l-4 cl3 p-b-12">
+                  Leave a Comment
+                </h4>
+                <form method="POST">
+                  {% csrf_token %}
+                  {{ form.text.label_tag }}
+                    <div class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20">
+                      {{ form.text }}
+                    </div>
+                    <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
+                      Post Comment
+                    </button>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+

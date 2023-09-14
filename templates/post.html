@@ -1,0 +1,89 @@
+{% extends 'banner.html' %}
+
+{% block title %}
+    {{ post.title | truncatewords:5 }}
+{% endblock title %}
+
+{% block content %}
+
+<!-- Content -->
+	<section class="bg0 p-b-140 p-t-10">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8 p-b-30">
+					<div class="p-r-10 p-r-0-sr991">
+						<!-- Blog Detail -->
+						<div class="p-b-70">
+							<a href="{% url 'posts_by_categories' post.category.slug %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+                                {{ post.category }}
+							</a>
+							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
+                                {{ post.title }}
+							</h3>
+                            <div class="flex-wr-s-s p-b-40">
+								<span class="f1-s-3 cl8 m-r-15">
+									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+										by {{ post.author }}
+									</a>
+
+									<span class="m-rl-3">-</span>
+
+									<span>
+										{{ post.date | date:'d M Y' }}
+									</span>
+								</span>
+
+								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
+									{{ accepted_comments.count }} Comments
+								</a>
+							</div>
+                            <div class="wrap-pic-max-w p-b-30">
+                                {% if post.media_content %}
+									<img src='{{ post.media_content.url }}' alt="MEDIA">
+								{% endif %}
+                                {% if post.image %}
+									<img src='{{ post.image.url }}' alt="IMG">
+                                {% endif %}
+							</div>
+
+							<p class="f1-s-11 cl6 p-b-25">
+                                {{ post.text }}
+							</p>
+                        </div>
+						{% if post.comments %}
+							<strong>Comments</strong>
+							<div class="p-b-70">
+								{% for comment in accepted_comments %}
+									<hr>
+									<div class="flex-wr-s-s p-b-40">
+										<span class="f1-s-3 cl8 m-r-15">
+											<span>
+												by {{ comment.author }}
+											</span>
+											<span class="m-rl-3">-</span>
+											<span>
+												{{ comment.date | date:'d M Y' }}
+											</span>
+										</span>
+										<p class="f1-s-11 cl6 p-b-25">
+											{{ comment.text }}
+										</p>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+                        <!-- Leave a comment -->
+						{% if post.author != user %}
+							{% if user.is_authenticated %}
+								<a href="{% url 'add_comment' post.id %}" class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Leave a Comment</a>
+							{% else %}
+								<a href="accounts/login" class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Sing in to leave a Comment</a>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'banner.html' %}
+
+{% block title %}
+Delete Post
+{% endblock title %}
+
+{% block content %}
+<div class="container p-t-4 p-b-40">
+    <h2 class="f1-l-1 cl2">
+        <br>
+        Are you sure you want to delete this post?
+    </h2>
+</div>
+<section class="bg0 p-b-140 p-t-10">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 p-b-30">
+                <div class="p-r-10 p-r-0-sr991">
+                    <div class="p-b-70">
+                        <p>
+                            <strong><em>{{ post.category }}</em></strong>
+                        </p>
+                        <br>
+                        <h4>
+                            <strong>{{ post.title }}</strong>
+                        </h4>
+                        <br>
+                        <p>
+                            {{ post.text | truncatewords:30}}
+                        </p>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
